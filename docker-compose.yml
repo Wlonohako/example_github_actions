@@ -1,0 +1,21 @@
+services:
+  fast-api-backend:
+    build: .
+    ports:
+      - "2137:80"
+    depends_on:
+      - mongodb
+    networks:
+      - example-network
+  mongodb:
+    image: mongo:7
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./dbdata:/data/db
+    networks:
+      - example-network
+
+networks:
+  example-network:
+    driver: bridge
